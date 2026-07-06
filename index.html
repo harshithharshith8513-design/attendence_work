@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christ Attendance System</title>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Split Sidebar Container -->
+    <aside class="sidebar">
+        <!-- Far Left Icon Bar -->
+        <div class="sidebar-icon-bar">
+            <div class="sidebar-brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            
+            <nav class="sidebar-icons-list">
+                <div class="sidebar-icon-item active" data-target="dashboard" title="Dashboard">
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <div class="sidebar-icon-item" data-target="attendance" title="Take Attendance">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <div class="sidebar-icon-item" data-target="reports" title="Show Reports">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="sidebar-icon-item" data-target="profile" title="My Profile">
+                    <i class="fa-solid fa-user-gear"></i>
+                </div>
+            </nav>
+            
+            <div class="sidebar-icon-item" title="Logout" onclick="alert('Session logged out successfully!')">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+        </div>
+
+        <!-- Secondary White Text Bar -->
+        <div class="sidebar-text-bar">
+            <div class="sidebar-brand-name" style="font-size: 14px; letter-spacing: 0.5px; white-space: nowrap; font-weight: 700;">Christ Attendance System</div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item active" data-target="dashboard">
+                    <a href="#dashboard">
+                        <i class="fa-solid fa-chart-pie" style="width: 20px; margin-right: 10px;"></i> Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-menu-item" data-target="attendance">
+                    <a href="#attendance">
+                        <i class="fa-solid fa-calendar-check" style="width: 20px; margin-right: 10px;"></i> Attendance
+                    </a>
+                </li>
+                <li class="sidebar-menu-item" data-target="reports">
+                    <a href="#reports">
+                        <i class="fa-solid fa-chart-line" style="width: 20px; margin-right: 10px;"></i> Reports
+                    </a>
+                </li>
+                <li class="sidebar-menu-item" data-target="profile">
+                    <a href="#profile">
+                        <i class="fa-solid fa-user-gear" style="width: 20px; margin-right: 10px;"></i> My Profile
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- App Shell Main Layout -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left-icons">
+                <i class="fa-solid fa-bars header-icon" id="toggle-sidebar-btn" title="Toggle Sidebar"></i>
+                <i class="fa-regular fa-envelope header-icon" title="Messages"></i>
+                <i class="fa-regular fa-comments header-icon" title="Chat Discussions"></i>
+                <i class="fa-regular fa-circle-check header-icon" title="Tasks Check"></i>
+                <i class="fa-regular fa-calendar header-icon" title="Calendar Events"></i>
+            </div>
+            
+            <div class="header-right-user">
+                <div class="header-notification" title="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <div class="user-profile-summary" data-target="profile">
+                    <div class="user-meta">
+                        <span class="user-name" id="hdr-teacher-name">Dr. Sunny Joseph</span>
+                        <span class="user-role" id="hdr-teacher-role">Professor & Coordinator</span>
+                    </div>
+                    <div class="user-avatar-monogram" id="hdr-teacher-avatar">SJ</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Dynamic Body -->
+        <main class="page-content">
+            
+            <!-- 1. DASHBOARD PAGE -->
+            <section id="page-dashboard" class="page active">
+                <div class="page-title-section">
+                    <h1 class="page-title">Dashboard Overview</h1>
+                </div>
+
+                <!-- Stats Cards Row -->
+                <div class="quick-dashboard-stats">
+                    <div class="quick-stat-card">
+                        <span class="quick-stat-label">Total Assigned Students</span>
+                        <span class="quick-stat-value" id="dash-total-students">14</span>
+                        <span class="quick-stat-desc">Across all sections</span>
+                    </div>
+                    <div class="quick-stat-card">
+                        <span class="quick-stat-label">Average Class Attendance</span>
+                        <span class="quick-stat-value" id="dash-avg-attendance">92%</span>
+                        <span class="quick-stat-desc">Current month average</span>
+                    </div>
+                    <div class="quick-stat-card">
+                        <span class="quick-stat-label">Attendance Today</span>
+                        <span class="quick-stat-value" id="dash-today-status">Submitted</span>
+                        <span class="quick-stat-desc" id="dash-today-time">Checked for today</span>
+                    </div>
+                </div>
+
+                <!-- Welcome Card -->
+                <div style="background: linear-gradient(135deg, #2e37a4 0%, #4f46e5 100%); color: #ffffff; border-radius: var(--radius-md); padding: 30px; box-shadow: var(--shadow-md); margin-bottom: 25px;">
+                    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Welcome back, <span id="dash-teacher-welcome">Dr. Sunny Joseph</span>!</h2>
+                    <p style="font-size: 14px; opacity: 0.9; max-width: 600px; line-height: 1.5; margin-bottom: 15px;">
+                        Manage student attendances, record late arrivals, track medical leaves, and compile detailed reports. Select a class from the options to begin.
+                    </p>
+                    <button class="btn-primary" style="background-color: #ffffff; color: #2e37a4;" onclick="switchTab('attendance')">
+                        <i class="fa-solid fa-calendar-check"></i> Take Attendance Now
+                    </button>
+                </div>
+
+                <!-- Active Schedule Tracker -->
+                <div class="history-section-card">
+                    <div class="history-card-header">
+                        <h3 class="history-card-title"><i class="fa-solid fa-list-check" style="margin-right: 8px;"></i> Recent Submissions</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Class / Batch</th>
+                                    <th>Subject</th>
+                                    <th>Total Students</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-recent-submissions-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. ATTENDANCE TAKING PAGE -->
+            <section id="page-attendance" class="page">
+                <div class="page-title-section">
+                    <h1 class="page-title">Attendance Sheet</h1>
+                    
+                    <div class="date-selector-container">
+                        <button class="date-nav-btn" id="prev-date-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        <span class="current-date-display" id="date-display-str">Today 09 Dec 2019</span>
+                        <input type="date" id="hidden-date-picker" style="display:none;">
+                        <button class="date-nav-btn" id="date-picker-trigger" title="Select Date"><i class="fa-regular fa-calendar-days"></i></button>
+                        <button class="date-nav-btn" id="next-date-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Filters toolbar -->
+                <div class="toolbar-section">
+                    <div class="filters-group">
+                        <div class="select-wrapper">
+                            <select class="toolbar-select" id="select-class">
+                                <option value="MCA A">MCA A</option>
+                                <option value="MCA B">MCA B</option>
+                                <option value="MSC AI ML">MSC AI ML</option>
+                            </select>
+                        </div>
+                        <div class="select-wrapper">
+                            <select class="toolbar-select" id="select-subject">
+                                <!-- Populated dynamically by JS based on selected class -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="toolbar-actions">
+                        <button class="btn-primary" id="take-attendance-btn">
+                            <i class="fa-solid fa-check-double"></i> Save Attendance
+                        </button>
+                        <div class="view-toggle-btn active" title="Grid View">
+                            <i class="fa-solid fa-table-cells-large"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Alphabet Groups of Student Cards -->
+                <div id="attendance-students-container">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </section>
+
+            <!-- 3. REPORT SHOWING PAGE (Admin POV) -->
+            <section id="page-reports" class="page">
+                <div class="page-title-section">
+                    <h1 class="page-title">Attendance Reports</h1>
+                    
+                    <!-- View toggle sub-tabs -->
+                    <div class="sub-tabs-container">
+                        <button class="sub-tab-btn active" id="btn-class-report">Class Report</button>
+                        <button class="sub-tab-btn" id="btn-student-report">Individual Report</button>
+                    </div>
+                </div>
+
+                <!-- A. CLASS REPORT VIEW -->
+                <div id="view-class-report">
+                    <!-- Class selector bar -->
+                    <div class="reports-selection-bar">
+                        <span class="student-dropdown-label">Select Class / Batch:</span>
+                        <select class="student-search-select" id="select-report-class">
+                            <option value="MCA A">MCA A</option>
+                            <option value="MCA B">MCA B</option>
+                            <option value="MSC AI ML">MSC AI ML</option>
+                        </select>
+                    </div>
+
+                    <!-- Class Metrics Dashboard -->
+                    <div class="dashboard-grid">
+                        <!-- Overall class percentage display -->
+                        <div class="progress-card">
+                            <svg class="circular-progress-svg">
+                                <circle class="circle-bg" cx="80" cy="80" r="70"></circle>
+                                <circle class="circle-fill" id="class-circle-fill" cx="80" cy="80" r="70"></circle>
+                                <text class="circle-text" x="80" y="80" text-anchor="middle" dominant-baseline="middle" id="class-percentage-val">0%</text>
+                            </svg>
+                            <div class="overall-status-text">Class Average Attendance</div>
+                            <span class="status-label-badge" id="class-status-badge">Excellent</span>
+                        </div>
+
+                        <!-- Class Stats Cards -->
+                        <div class="stats-cards-container">
+                            <div class="stat-metric-card present-hours">
+                                <div class="stat-card-icon"><i class="fa-regular fa-clock"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="class-hours-present">0h</span>
+                                    <span class="stat-card-label">Total Present Hours</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card absent-hours">
+                                <div class="stat-card-icon"><i class="fa-solid fa-hourglass-end"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="class-hours-absent">0h</span>
+                                    <span class="stat-card-label">Total Absent Hours</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card late-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-user-clock"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="class-late-count">0</span>
+                                    <span class="stat-card-label">Total Late Arrivals</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card medical-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="class-medical-count">0</span>
+                                    <span class="stat-card-label">Total Medical Leaves</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card informed-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-file-signature"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="class-informed-count">0</span>
+                                    <span class="stat-card-label">Total Informed Leaves</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card uninformed-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="class-uninformed-count">0</span>
+                                    <span class="stat-card-label">Total Uninformed Leaves</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Students Performance Summary Table -->
+                    <div class="history-section-card">
+                        <div class="history-card-header">
+                            <h3 class="history-card-title"><i class="fa-solid fa-users-viewfinder" style="margin-right: 8px;"></i> Student Performance Summary</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Roll No</th>
+                                        <th>Attendance %</th>
+                                        <th>Present (Hours)</th>
+                                        <th>Absent (Hours)</th>
+                                        <th>Late (Count)</th>
+                                        <th>Leaves (M / I / U)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="class-summary-table-body">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- B. INDIVIDUAL STUDENT REPORT VIEW -->
+                <div id="view-student-report" style="display: none;">
+                    <!-- Student selector header -->
+                    <div class="reports-selection-bar">
+                        <span class="student-dropdown-label">Select Student:</span>
+                        <select class="student-search-select" id="select-report-student">
+                            <!-- Populated dynamically -->
+                        </select>
+                        <button class="btn-primary" id="btn-back-to-class" style="margin-left: auto; background-color: #f3f4f6; color: var(--text-secondary); padding: 8px 15px; font-size: 13px; border: 1px solid var(--border-color);">
+                            <i class="fa-solid fa-arrow-left"></i> Back to Class Report
+                        </button>
+                    </div>
+
+                    <!-- Metrics Dashboard Grid -->
+                    <div class="dashboard-grid">
+                        <!-- Overall percentage display (left) -->
+                        <div class="progress-card">
+                            <svg class="circular-progress-svg">
+                                <circle class="circle-bg" cx="80" cy="80" r="70"></circle>
+                                <circle class="circle-fill" id="report-circle-fill" cx="80" cy="80" r="70"></circle>
+                                <text class="circle-text" x="80" y="80" text-anchor="middle" dominant-baseline="middle" id="report-percentage-val">0%</text>
+                            </svg>
+                            <div class="overall-status-text">Overall Attendance</div>
+                            <span class="status-label-badge" id="report-status-badge">Excellent</span>
+                        </div>
+
+                        <!-- Individual Cards (right) -->
+                        <div class="stats-cards-container">
+                            <div class="stat-metric-card present-hours">
+                                <div class="stat-card-icon"><i class="fa-regular fa-clock"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="rep-hours-present">0h</span>
+                                    <span class="stat-card-label">Hours Present</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card absent-hours">
+                                <div class="stat-card-icon"><i class="fa-solid fa-hourglass-end"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="rep-hours-absent">0h</span>
+                                    <span class="stat-card-label">Hours Absent</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card late-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-user-clock"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="rep-late-count">0</span>
+                                    <span class="stat-card-label">Late Arrival</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card medical-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="rep-medical-count">0</span>
+                                    <span class="stat-card-label">Medical Leaves</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card informed-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-file-signature"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="rep-informed-count">0</span>
+                                    <span class="stat-card-label">Informed Leaves</span>
+                                </div>
+                            </div>
+                            <div class="stat-metric-card uninformed-count">
+                                <div class="stat-card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <div class="stat-card-info">
+                                    <span class="stat-card-val" id="rep-uninformed-count">0</span>
+                                    <span class="stat-card-label">Uninformed Leaves</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- History Log Table -->
+                    <div class="history-section-card">
+                        <div class="history-card-header">
+                            <h3 class="history-card-title"><i class="fa-regular fa-folder-open" style="margin-right: 8px;"></i> Student Attendance History Logs</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Class Details</th>
+                                        <th>Subject</th>
+                                        <th>Status Marked</th>
+                                        <th>Hours Attended</th>
+                                        <th>Status Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="report-history-table-body">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. PROFILE PAGE -->
+            <section id="page-profile" class="page">
+                <div class="page-title-section">
+                    <h1 class="page-title">Admin Profile</h1>
+                </div>
+
+                <div class="profile-grid">
+                    <!-- Profile Card (Left Column) -->
+                    <div class="profile-card-left">
+                        <div class="profile-cover-placeholder"></div>
+                        <div class="profile-pic-container">
+                            <div class="profile-pic-large-monogram" id="prof-avatar">SJ</div>
+                        </div>
+                        <h2 class="profile-name-lg" id="prof-name">Dr. Sunny Joseph</h2>
+                        <span class="profile-desig-lg" id="prof-designation">Professor & Coordinator</span>
+                        
+                        <div class="profile-divider"></div>
+                        
+                        <div class="profile-details-list">
+                            <div class="profile-detail-item">
+                                <span class="profile-detail-label">Email Address</span>
+                                <span class="profile-detail-val" id="prof-email">sunny.joseph@christuniversity.in</span>
+                            </div>
+                            <div class="profile-detail-item">
+                                <span class="profile-detail-label">Phone Number</span>
+                                <span class="profile-detail-val" id="prof-phone">+91 80 4012 9100</span>
+                            </div>
+                            <div class="profile-detail-item">
+                                <span class="profile-detail-label">Department</span>
+                                <span class="profile-detail-val" id="prof-department">Department of Computer Science</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Settings Card (Right Column) -->
+                    <div class="profile-card-right">
+                        <h3 class="profile-section-title">Account Details & Settings</h3>
+                        
+                        <form id="edit-profile-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="input-name">Full Name</label>
+                                    <input type="text" id="input-name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="input-email">Email Address</label>
+                                    <input type="email" id="input-email" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="input-phone">Phone Number</label>
+                                    <input type="text" id="input-phone" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="input-designation">Designation</label>
+                                    <input type="text" id="input-designation" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="input-class">Class Managed</label>
+                                    <input type="text" id="input-class" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="input-subject">Default Subject</label>
+                                    <input type="text" id="input-subject" class="form-input" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Profile Details
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Notifications Area -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
